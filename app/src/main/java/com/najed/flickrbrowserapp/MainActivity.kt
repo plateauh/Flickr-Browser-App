@@ -29,8 +29,10 @@ class MainActivity : AppCompatActivity() {
         searchEditText = findViewById(R.id.search_et)
         searchButton = findViewById(R.id.search_btn)
         searchButton.setOnClickListener {
-            if (searchEditText.text.toString().isNotEmpty())
+            if (searchEditText.text.toString().isNotEmpty()){
                 getPhotos(searchEditText.text.toString())
+                searchEditText.setText("")
+            }
             else
                 Toast.makeText(this, "Please enter a search keyword", Toast.LENGTH_SHORT).show()
         }

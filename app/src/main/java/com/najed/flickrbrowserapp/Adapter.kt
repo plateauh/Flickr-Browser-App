@@ -1,6 +1,7 @@
 package com.najed.flickrbrowserapp
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -17,17 +18,23 @@ class Adapter (val context: Context, val photos: PhotoCollection): RecyclerView.
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val photo = photos.photos.photo[position]
+        val photoURL = fetchPhoto(photo)
         holder.binding.apply {
             titleTv.text = photo.title
             Glide.with(context)
-                .load(fetchPhoto(photo))
+                .load("${photoURL}_s.jpg")
                 .into(photoIv)
+            photoIv.setOnClickListener {
+                val intent = Intent(context, PhotoDetailsActivity::class.java)
+                intent.putExtra("photoURL", photoURL)
+                context.startActivity(intent)
+            }
         }
     }
 
     override fun getItemCount() = photos.photos.photo.size
 
     private fun fetchPhoto (photo: Photo): String {
-        return "https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_s.jpg"
+        return "https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}"
     }
 }
