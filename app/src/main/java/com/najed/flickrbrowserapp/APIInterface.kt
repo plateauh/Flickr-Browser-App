@@ -10,6 +10,6 @@ interface APIInterface {
         const val apiKey = "4a3f80cf9fdd204a30faa774deaa0bd9"
     }
 
-    @GET("rest/?method=flickr.photos.search&api_key=$apiKey&format=json")
-    fun getPhotos(@Query("text") text: String): Call<Photos?>?
+    @GET("rest/?method=flickr.photos.search&api_key=$apiKey&format=json&nojsoncallback=1")
+    fun getPhotos(@Query("text") text: String): Call<PhotoCollection?>?
 }

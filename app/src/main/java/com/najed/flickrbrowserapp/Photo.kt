@@ -2,7 +2,21 @@ package com.najed.flickrbrowserapp
 
 import com.google.gson.annotations.SerializedName
 
-class Photos: ArrayList<Photo>()
+data class PhotoCollection (
+        @SerializedName("photos")
+        val photos: Photos,
+
+        @SerializedName("stat")
+        val stat: String
+        )
+
+data class Photos (
+        @SerializedName("photo")
+        val photo: List<Photo>,
+
+        @SerializedName("total")
+        val total: Int
+        )
 
 data class Photo (
         @SerializedName("id")
@@ -19,4 +33,4 @@ data class Photo (
 
         @SerializedName("title")
         val title: String
-)
+        )
